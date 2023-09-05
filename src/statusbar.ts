@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 import Config from './config';
 import * as gzip from 'gzip-js';
-import * as filesize from 'filesize.js';
 
 class Statusbar {
     icon: vscode.StatusBarItem;
@@ -29,7 +28,8 @@ class Statusbar {
             level: this.config.level,
         };
         if (vscode.window.activeTextEditor) {
-            this.icon.text = `$(file-zip) ${filesize(gzip.zip(vscode.window.activeTextEditor.document.getText(), options).length)}`;
+            const text = vscode.window.activeTextEditor.document.getText();
+            this.icon.text = `$(file-zip) ${(new Blob([text]).size / gzip.zip(text, options).length) * 100}%`;
             this.icon.show();
         }
         else {

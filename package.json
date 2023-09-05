@@ -61,7 +61,6 @@
 		"watch": "webpack --mode none --watch"
 	},
 	"dependencies": {
-		"filesize.js": "2.0.0",
 		"gzip-js": "0.3.2"
 	},
 	"devDependencies": {
